@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use MeiliSearch\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
+Artisan::command('sortable', function () {
+    $client = new Client(config('scout.meilisearch.host'));
+
+    $client->index('users')->updateSortableAttributes(['id', 'name', 'email']);
 })->purpose('Display an inspiring quote');
