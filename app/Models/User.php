@@ -67,4 +67,15 @@ class User extends Authenticatable
             "address" => $this->address,
         ];
     }
+
+    /**
+     * Modify the query used to retrieve models when making all of the models searchable.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    protected function makeAllSearchableUsing(Builder $query): Builder
+    {
+        return $query->withoutGlobalScopes();
+    }
 }
